@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Partner Program - Offre de Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563EB;      /* Bleu Royal */
+            --primary-dark: #1E40AF;
+            --accent: #F59E0B;       /* Or / Ambre pour les experts */
+            --bg-color: #F3F4F6;     /* Gris très clair fond de page */
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-light: #6B7280;
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-deep: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-lg: 24px;
+            --radius-md: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 50px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: white;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), #4F46E5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        header p { color: var(--text-light); font-size: 1.1rem; }
+
+        /* --- CONTAINER --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- SECTION 1: MASTER CARD ENERGY LAUNCH --- */
+        .master-card-wrapper {
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .master-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-deep);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* Bandeau décoratif en haut de la carte */
+        .master-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), #60A5FA);
+        }
+
+        .master-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .master-title h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .master-title span {
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .price-tag {
+            background-color: #EFF6FF;
+            color: var(--primary-dark);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 1px solid #BFDBFE;
+        }
+
+        /* GRID DES SERVICES INCLUS */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-tile {
+            background: #FAFAFA;
+            border: 1px solid #E5E7EB;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .service-tile:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-soft);
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .tile-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tile-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .tile-pill {
+            font-size: 0.7rem;
+            background: #DBEAFE;
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        /* --- SECTION 2: CATALOGUE EXPERT --- */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .section-title h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .section-title span {
+            background: #FEF3C7;
+            color: #B45309;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .expert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .expert-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 0;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+
+        .expert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-deep);
+            border-color: var(--accent);
+        }
+
+        .expert-header {
+            background: #FFFBEB;
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #FDE68A;
+        }
+        .expert-icon { font-size: 2.5rem; }
+        
+        .expert-body { padding: 1.5rem; text-align: center;}
+        
+        .expert-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .expert-badge {
+            font-size: 0.8rem;
+            color: #B45309;
+            font-weight: 600;
+        }
+
+        /* --- MODAL POPUP --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: var(--shadow-deep);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            background: none;
+            border: none;
+        }
+
+        .modal-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+        .modal-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); }
+        .modal-price { 
+            font-size: 1rem; 
+            font-weight: 700; 
+            color: var(--primary); 
+            background: #EFF6FF; 
+            display: inline-block; 
+            padding: 4px 12px; 
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+        .modal-desc { color: var(--text-main); line-height: 1.6; margin-bottom: 1.5rem; }
+        
+        .modal-list-title { font-size: 0.9rem; text-transform: uppercase; color: var(--text-light); font-weight: 700; margin-bottom: 0.5rem; }
+        .modal-list { list-style: none; }
+        .modal-list li { 
+            position: relative; 
+            padding-left: 1.5rem; 
+            margin-bottom: 0.5rem; 
+            font-size: 0.95rem;
+            color: #4B5563;
+        }
+        .modal-list li::before {
+            content: '✓';
+            color: var(--accent); /* Green check */
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .master-card { padding: 1.5rem; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Architecture Services Partenaires</h1>
+            <p>Plateforme interactive de présentation</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="master-card-wrapper">
+            <div class="master-card">
+                <div class="master-header">
+                    <div class="master-title">
+                        <span>Le Socle Indispensable</span>
+                        <h2>Pack Energy Launch</h2>
+                    </div>
+                    <div class="price-tag">99 € / mois</div>
+                </div>
+
+                <p style="margin-bottom: 2rem; color: #6B7280;">Tout ce dont vous avez besoin pour opérer, inclus dans votre abonnement mensuel.</p>
+
+                <div class="services-grid">
+                    <div class="service-tile" onclick="openModal('formation-init')">
+                        <span class="tile-icon">🎓</span>
+                        <div class="tile-name">Formation Initiale Courtage</div>
+                        <span class="tile-pill">Inclus</span>
+                    </div>
+                    <div class="service-tile" onclick="openModal('admin')">
+                        <span class="tile-icon">📁</span>
+                        <div class="tile-name">Suivi Ventes & Facturation</div>
+                        <span class="tile-pill">Inclus</span>
+                    </div>
+                    <div class="service-tile" onclick="openModal('multi-fournisseur')">
+                        <span class="tile-icon">⚡</span>
+                        <div class="tile-name">Courtage Multi-Fournisseurs</div>
+                        <span class="tile-pill">Inclus</span>
+                    </div>
+                    <div class="service-tile" onclick="openModal('tools')">
+                        <span class="tile-icon">💻</span>
+                        <div class="tile-name">Accès OSE & ENEO</div>
+                        <span class="tile-pill">Inclus</span>
+                    </div>
+                    <div class="service-tile" onclick="openModal('market')">
+                        <span class="tile-icon">📊</span>
+                        <div class="tile-name">Info Marché & Veille</div>
+                        <span class="tile-pill">Inclus</span>
+                    </div>
+                    <div class="service-tile" onclick="openModal('litiges')">
+                        <span class="tile-icon">⚖️</span>
+                        <div class="tile-name">Gestion Litiges Fournisseur</div>
+                        <span class="tile-pill">Inclus</span>
+                    </div>
+                    <div class="service-tile" onclick="openModal('formation-outils')">
+                        <span class="tile-icon">🛠️</span>
+                        <div class="tile-name">Formation Outils</div>
+                        <span class="tile-pill">Inclus</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <span>Sur Demande</span>
+            <h2>Catalogue Expert Solutions</h2>
+            <p style="color: #6B7280; margin-top: 0.5rem;">Activez des leviers de performance additionnels.</p>
+        </div>
+
+        <div class="expert-grid">
+            
+            <div class="expert-card" onclick="openModal('turpe')">
+                <div class="expert-header">
+                    <span class="expert-icon">📉</span>
+                </div>
+                <div class="expert-body">
+                    <div class="expert-name">Optimisation TURPE</div>
+                    <div class="expert-badge">Sur devis / Forfait</div>
+                </div>
+            </div>
+
+            <div class="expert-card" onclick="openModal('assises')">
+                <div class="expert-header">
+                    <span class="expert-icon">🏛️</span>
+                </div>
+                <div class="expert-body">
+                    <div class="expert-name">Optimisation Assises</div>
+                    <div class="expert-badge">Partage d'économies</div>
+                </div>
+            </div>
+
+            <div class="expert-card" onclick="openModal('upfront')">
+                <div class="expert-header">
+                    <span class="expert-icon">💰</span>
+                </div>
+                <div class="expert-body">
+                    <div class="expert-name">Facilité de Caisse (Upfront)</div>
+                    <div class="expert-badge">10% Marge</div>
+                </div>
+            </div>
+
+            <div class="expert-card" onclick="openModal('rdv')">
+                <div class="expert-header">
+                    <span class="expert-icon">🤝</span>
+                </div>
+                <div class="expert-body">
+                    <div class="expert-name">Accompagnement RDV</div>
+                    <div class="expert-badge">Sur mesure</div>
+                </div>
+            </div>
+
+            <div class="expert-card" onclick="openModal('go')">
+                <div class="expert-header">
+                    <span class="expert-icon">🌱</span>
+                </div>
+                <div class="expert-body">
+                    <div class="expert-name">Garanties d'Origine</div>
+                    <div class="expert-badge">Sur mesure</div>
+                </div>
+            </div>
+
+            <div class="expert-card" onclick="openModal('grands-comptes')">
+                <div class="expert-header">
+                    <span class="expert-icon">🏢</span>
+                </div>
+                <div class="expert-body">
+                    <div class="expert-name">Sourcing Grands Comptes</div>
+                    <div class="expert-badge">Sur mesure</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModalBtn()">×</button>
+            <span class="modal-icon" id="mIcon"></span>
+            <h3 class="modal-title" id="mTitle">Titre du service</h3>
+            <div class="modal-price" id="mPrice">Inclus dans le pack</div>
+            <p class="modal-desc" id="mDesc">Description du service...</p>
+            
+            <div class="modal-list-title">Ce que vous obtenez :</div>
+            <ul class="modal-list" id="mList">
+                </ul>
+        </div>
+    </div>
+
+    <script>
+        // DATA
+        const servicesData = {
+            // PACK LAUNCH
+            'formation-init': {
+                icon: '🎓',
+                title: 'Formation Initiale Courtage',
+                price: 'Inclus dans le Pack',
+                desc: 'Un parcours d\'intégration complet pour maîtriser les fondamentaux du marché de l\'énergie et la posture commerciale.',
+                items: ['Session E-learning ou Présentiel', 'Playbook de vente complet', 'Quiz de validation des acquis']
+            },
+            'admin': {
+                icon: '📁',
+                title: 'Suivi des Ventes & Facturation',
+                price: 'Inclus dans le Pack',
+                desc: 'Déléguez toute la complexité administrative. Nous gérons le cycle de vie du contrat post-signature.',
+                items: ['Validation conformité des dossiers', 'Envoi aux fournisseurs', 'Émission de vos factures (Autofacturation)']
+            },
+            'multi-fournisseur': {
+                icon: '⚡',
+                title: 'Courtage Multi-Fournisseurs',
+                price: 'Inclus dans le Pack',
+                desc: 'Accédez immédiatement à notre portefeuille de partenaires énergéticiens négociés.',
+                items: ['Grilles tarifaires unifiées', 'Contrats cadres pré-négociés', 'Accès Gaz et Électricité']
+            },
+            'tools': {
+                icon: '💻',
+                title: 'Accès OSE & ENEO/VOLTO',
+                price: 'Inclus dans le Pack',
+                desc: 'La puissance de la tech : CRM propriétaire et Agrégateurs de prix en temps réel.',
+                items: ['Licence utilisateur OSE', 'Tableau de bord activité', 'Comparateur de prix instantané']
+            },
+            'market': {
+                icon: '📊',
+                title: 'Info Marché & Veille',
+                price: 'Inclus dans le Pack',
+                desc: 'Restez expert face à vos clients grâce à notre veille continue des marchés boursiers.',
+                items: ['Newsletter tendances hebdo', 'Alertes volatilité', 'Argumentaires à jour']
+            },
+            'litiges': {
+                icon: '⚖️',
+                title: 'Gestion Litiges Fournisseur',
+                price: 'Inclus dans le Pack',
+                desc: 'Notre back-office intervient pour débloquer les situations complexes (coupures, facturation erronée).',
+                items: ['Ticketing de suivi', 'Résolution directe avec fournisseurs', 'Protection réputation']
+            },
+            'formation-outils': {
+                icon: '🛠️',
+                title: 'Formation Outils',
+                price: 'Inclus dans le Pack',
+                desc: 'Soyez opérationnel techniquement dès le premier jour.',
+                items: ['Tutos vidéos', 'Guides PDF', 'Support prise en main']
+            },
+
+            // EXPERT SOLUTIONS
+            'turpe': {
+                icon: '📉',
+                title: 'Optimisation TURPE',
+                price: '150€ / Dossier (Sur demande)',
+                desc: 'Analyse technique de la puissance souscrite pour réduire les coûts d\'acheminement.',
+                items: ['Audit de puissance (10 min/Pt)', 'Rapport d\'économie', 'Gestion de la demande Enedis']
+            },
+            'assises': {
+                icon: '🏛️',
+                title: 'Optimisation des Assises',
+                price: 'Frais dossier + 30% des gains',
+                desc: 'Récupération des taxes (CSPE/TICFE) pour les industriels éligibles.',
+                items: ['Audit d\'éligibilité', 'Montage dossier Douanes', 'Suivi du remboursement']
+            },
+            'upfront': {
+                icon: '💰',
+                title: 'Facilité de Caisse (Upfront)',
+                price: 'Coût : 10% de Marge Revendeur',
+                desc: 'Besoin de trésorerie ? Percevez vos commissions en avance.',
+                items: ['Paiement anticipé', 'Scoring partenaire', 'Sécurisation du BFR']
+            },
+            'rdv': {
+                icon: '🤝',
+                title: 'Accompagnement RDV Client',
+                price: 'Sur Mesure',
+                desc: 'Faites venir un Directeur Commercial ou un Expert Technique pour closer vos gros deals.',
+                items: ['Préparation stratégique', 'Présence physique ou visio', 'Debriefing commercial']
+            },
+            'go': {
+                icon: '🌱',
+                title: 'Garanties d\'Origine',
+                price: 'Sur Mesure',
+                desc: 'Verdissement de l\'offre pour les clients RSE.',
+                items: ['Sourcing certificats verts', 'Attestations officielles', 'Valorisation marketing']
+            },
+            'grands-comptes': {
+                icon: '🏢',
+                title: 'Sourcing Grands Comptes',
+                price: 'Sur Mesure',
+                desc: 'Stratégies d\'achat complexes pour les volumes > 1GWh.',
+                items: ['Achats par tranches (clics)', 'Analyse ARENH complexe', 'Note de stratégie']
+            }
+        };
+
+        // LOGIC
+        const modalOverlay = document.getElementById('modalOverlay');
+        
+        function openModal(id) {
+            const data = servicesData[id];
+            if(!data) return;
+
+            // Populate content
+            document.getElementById('mIcon').textContent = data.icon;
+            document.getElementById('mTitle').textContent = data.title;
+            document.getElementById('mPrice').textContent = data.price;
+            document.getElementById('mDesc').textContent = data.desc;
+            
+            // Color logic for price tag
+            const priceTag = document.getElementById('mPrice');
+            if(data.price.includes('Inclus')) {
+                priceTag.style.color = '#2563EB';
+                priceTag.style.background = '#EFF6FF';
+            } else {
+                priceTag.style.color = '#B45309';
+                priceTag.style.background = '#FFFBEB';
+            }
+
+            // List items
+            const list = document.getElementById('mList');
+            list.innerHTML = '';
+            data.items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+
+            modalOverlay.classList.add('active');
+        }
+
+        function closeModal(event) {
+            if (event.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
+        }
+
+        function closeModalBtn() {
+            modalOverlay.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
