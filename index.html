@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Energy Partner Program - Offre de Services</title>
+    <title>Smart-Electricité - Programme Partenaires</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563EB;      /* Bleu Royal */
             --primary-dark: #1E40AF;
             --accent: #F59E0B;       /* Or / Ambre pour les experts */
-            --bg-color: #F3F4F6;     /* Gris très clair fond de page */
+            --success: #10B981;      /* Vert pour la valeur ajoutée */
+            --dev-color: #7C3AED;    /* Violet pour OSE (Dev) */
+            --bg-color: #F3F4F6;
             --card-bg: #FFFFFF;
             --text-main: #1F2937;
             --text-light: #6B7280;
-            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-deep: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --radius-lg: 24px;
             --radius-md: 12px;
@@ -35,17 +36,16 @@
             padding: 3rem 1rem;
             background: white;
             margin-bottom: 2rem;
+            border-bottom: 1px solid #e5e7eb;
         }
 
         header h1 {
             font-weight: 800;
             font-size: 2.5rem;
-            background: linear-gradient(to right, var(--primary), #4F46E5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-main);
             margin-bottom: 0.5rem;
         }
-        header p { color: var(--text-light); font-size: 1.1rem; }
+        header span { color: var(--primary); }
 
         /* --- CONTAINER --- */
         .container {
@@ -54,28 +54,40 @@
             padding: 0 20px;
         }
 
-        /* --- SECTION 1: MASTER CARD ENERGY LAUNCH --- */
+        /* --- MASTER CARD ENERGY LAUNCH --- */
         .master-card-wrapper {
             position: relative;
             margin-bottom: 4rem;
         }
 
+        .brand-label {
+            background: var(--text-main);
+            color: white;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 12px 12px 0 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         .master-card {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
+            border-top-left-radius: 0;
             box-shadow: var(--shadow-deep);
             padding: 3rem;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.5);
         }
 
-        /* Bandeau décoratif en haut de la carte */
         .master-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 8px;
+            height: 6px;
             background: linear-gradient(90deg, var(--primary), #60A5FA);
         }
 
@@ -88,19 +100,8 @@
             gap: 1rem;
         }
 
-        .master-title h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-        }
-        .master-title span {
-            color: var(--primary);
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-        }
+        .master-title h2 { font-size: 2rem; font-weight: 800; color: var(--text-main); }
+        .master-title span { color: var(--primary); text-transform: uppercase; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.1em; }
 
         .price-tag {
             background-color: #EFF6FF;
@@ -112,10 +113,10 @@
             border: 1px solid #BFDBFE;
         }
 
-        /* GRID DES SERVICES INCLUS */
+        /* GRID DES SERVICES */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
             gap: 1.5rem;
         }
 
@@ -128,57 +129,33 @@
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .service-tile:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-soft);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             border-color: var(--primary);
             background: white;
         }
 
-        .tile-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
+        .tile-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+        .tile-name { font-weight: 600; font-size: 0.95rem; color: var(--text-main); line-height: 1.3; }
+        .tile-pill { font-size: 0.7rem; background: #DBEAFE; color: var(--primary); padding: 2px 8px; border-radius: 10px; margin-top: 10px; display: inline-block; }
 
-        .tile-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-main);
-        }
+        .service-tile.dev-mode { background: #F3F4F6; border-color: #E5E7EB; cursor: not-allowed; opacity: 0.8; }
+        .service-tile.dev-mode:hover { transform: none; box-shadow: none; }
+        .service-tile.dev-mode .tile-icon { opacity: 0.5; filter: grayscale(100%); }
+        .service-tile.dev-mode .tile-pill { background: #EDE9FE; color: var(--dev-color); border: 1px solid #DDD6FE; }
 
-        .tile-pill {
-            font-size: 0.7rem;
-            background: #DBEAFE;
-            color: var(--primary);
-            padding: 2px 8px;
-            border-radius: 10px;
-            margin-top: 8px;
-            display: inline-block;
-        }
-
-        /* --- SECTION 2: CATALOGUE EXPERT --- */
-        .section-title {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .section-title h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-        .section-title span {
-            background: #FEF3C7;
-            color: #B45309;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        /* --- SECTION EXPERT --- */
+        .section-title { text-align: center; margin-bottom: 2rem; }
+        .section-title h2 { font-size: 1.8rem; font-weight: 700; color: var(--text-main); }
+        .section-title span { background: #FEF3C7; color: #B45309; padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
         .expert-grid {
             display: grid;
@@ -189,8 +166,7 @@
         .expert-card {
             background: white;
             border-radius: var(--radius-md);
-            padding: 0;
-            box-shadow: var(--shadow-soft);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             cursor: pointer;
             overflow: hidden;
@@ -209,23 +185,20 @@
             text-align: center;
             border-bottom: 1px solid #FDE68A;
         }
-        .expert-icon { font-size: 2.5rem; }
         
         .expert-body { padding: 1.5rem; text-align: center;}
-        
-        .expert-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .expert-badge {
-            font-size: 0.8rem;
-            color: #B45309;
-            font-weight: 600;
+        .expert-name { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+        .expert-badge { 
+            font-size: 0.8rem; 
+            color: #B45309; 
+            font-weight: 700; 
+            background: #FEF3C7;
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
         }
 
-        /* --- MODAL POPUP --- */
+        /* --- MODAL --- */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -240,15 +213,14 @@
             transition: opacity 0.3s ease;
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
 
         .modal-content {
             background: white;
             width: 90%;
-            max-width: 500px;
+            max-width: 650px;
+            max-height: 85vh;
+            overflow-y: auto;
             border-radius: var(--radius-lg);
             padding: 2.5rem;
             position: relative;
@@ -257,71 +229,144 @@
             box-shadow: var(--shadow-deep);
         }
 
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
 
         .close-btn {
             position: absolute;
             top: 15px;
             right: 20px;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             color: var(--text-light);
             background: none;
             border: none;
         }
 
-        .modal-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
-        .modal-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main); }
-        .modal-price { 
-            font-size: 1rem; 
-            font-weight: 700; 
-            color: var(--primary); 
-            background: #EFF6FF; 
-            display: inline-block; 
-            padding: 4px 12px; 
-            border-radius: 6px;
-            margin-bottom: 1.5rem;
-        }
-        .modal-desc { color: var(--text-main); line-height: 1.6; margin-bottom: 1.5rem; }
+        .modal-header-group { text-align: center; margin-bottom: 1rem; }
+        .modal-icon { font-size: 3rem; display: block; margin-bottom: 0.5rem; }
+        .modal-title { font-size: 1.6rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem; }
         
-        .modal-list-title { font-size: 0.9rem; text-transform: uppercase; color: var(--text-light); font-weight: 700; margin-bottom: 0.5rem; }
-        .modal-list { list-style: none; }
-        .modal-list li { 
-            position: relative; 
-            padding-left: 1.5rem; 
-            margin-bottom: 0.5rem; 
-            font-size: 0.95rem;
-            color: #4B5563;
-        }
-        .modal-list li::before {
-            content: '✓';
-            color: var(--accent); /* Green check */
-            position: absolute;
-            left: 0;
-            font-weight: bold;
+        .modal-price { 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            display: inline-block; 
+            padding: 6px 16px; 
+            border-radius: 8px;
+            margin-bottom: 1rem;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .master-card { padding: 1.5rem; }
-            .services-grid { grid-template-columns: 1fr 1fr; }
+        /* Description principale */
+        .modal-desc { 
+            color: #374151; 
+            line-height: 1.6; 
+            margin-bottom: 1.5rem; 
+            font-size: 1.1rem; 
+            background: #F9FAFB;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
         }
+
+        /* Valeur Ajoutée Box */
+        .value-added-box {
+            background: #ECFDF5; /* Light Green */
+            border: 1px solid #D1FAE5;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            display: none; /* Hidden by default */
+        }
+        
+        .value-added-title {
+            color: #065F46;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .value-added-title::before { content: '🚀'; }
+        
+        .value-added-text {
+            color: #047857;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .modal-list-title { font-size: 0.9rem; text-transform: uppercase; color: var(--text-light); font-weight: 700; margin-bottom: 0.5rem; }
+        .modal-list { list-style: none; margin-bottom: 1.5rem; }
+        .modal-list li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.95rem; color: #4B5563; }
+        .modal-list li::before { content: '✓'; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
+
+        .btn-discover {
+            display: block; width: 100%; padding: 1rem; background-color: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 1rem; transition: background 0.3s;
+        }
+        .btn-discover:hover { background-color: var(--primary-dark); }
+
+        /* --- STYLING LISTE FORMATIONS PRO --- */
+        .detailed-program { margin-top: 1rem; text-align: left; }
+        
+        .program-section {
+            background: #F3F4F6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #E5E7EB;
+        }
+
+        .program-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #DBEAFE;
+            padding-bottom: 0.5rem;
+        }
+
+        .program-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+        .program-item:last-child { margin-bottom: 0; }
+        
+        .program-title { font-weight: 700; font-size: 1rem; color: #111827; display: block; margin-bottom: 4px; }
+        .program-format { font-size: 0.85rem; color: #6B7280; font-style: italic; display: flex; align-items: center; gap: 5px; }
+        .program-format::before { content: '📄'; font-style: normal; font-size: 0.8rem; }
+
+        /* Visual Info Marché */
+        .market-visual {
+            background: #1e293b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; position: relative;
+        }
+        .market-visual-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.8rem; opacity: 0.8; }
+        .market-visual-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
+        .trend-indicator { display: flex; align-items: center; gap: 5px; color: #4ade80; font-weight: bold; font-size: 0.9rem; }
+        .dummy-graph { height: 40px; border-bottom: 2px solid #475569; position: relative; margin-top: 10px; }
+        .dummy-line { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent 0%, rgba(74, 222, 128, 0.2) 100%); clip-path: polygon(0 100%, 0 80%, 20% 60%, 40% 70%, 60% 40%, 80% 50%, 100% 20%, 100% 100%); }
+
     </style>
 </head>
 <body>
 
     <header>
         <div class="container">
-            <h1>Architecture Services Partenaires</h1>
-            <p>Plateforme interactive de présentation</p>
+            <h1>Smart-Electricité<br><span style="font-size:1.5rem; font-weight:400; color:#6B7280">Programme Partenaires</span></h1>
         </div>
     </header>
 
     <div class="container">
         
         <div class="master-card-wrapper">
+            
+            <div class="brand-label">Powered by Smart-Electricité</div>
+            
             <div class="master-card">
                 <div class="master-header">
                     <div class="master-title">
@@ -331,116 +376,100 @@
                     <div class="price-tag">99 € / mois</div>
                 </div>
 
-                <p style="margin-bottom: 2rem; color: #6B7280;">Tout ce dont vous avez besoin pour opérer, inclus dans votre abonnement mensuel.</p>
-
                 <div class="services-grid">
+                    
                     <div class="service-tile" onclick="openModal('formation-init')">
                         <span class="tile-icon">🎓</span>
                         <div class="tile-name">Formation Initiale Courtage</div>
-                        <span class="tile-pill">Inclus</span>
+                        <span class="tile-pill">Programme Complet</span>
                     </div>
+
                     <div class="service-tile" onclick="openModal('admin')">
                         <span class="tile-icon">📁</span>
                         <div class="tile-name">Suivi Ventes & Facturation</div>
-                        <span class="tile-pill">Inclus</span>
+                        <span class="tile-pill">Back-Office</span>
                     </div>
+
                     <div class="service-tile" onclick="openModal('multi-fournisseur')">
                         <span class="tile-icon">⚡</span>
                         <div class="tile-name">Courtage Multi-Fournisseurs</div>
-                        <span class="tile-pill">Inclus</span>
+                        <span class="tile-pill">Près de 50 Partenaires</span>
                     </div>
-                    <div class="service-tile" onclick="openModal('tools')">
+
+                    <div class="service-tile" onclick="openModal('eneo-volto')">
                         <span class="tile-icon">💻</span>
-                        <div class="tile-name">Accès OSE & ENEO</div>
-                        <span class="tile-pill">Inclus</span>
+                        <div class="tile-name">Accès ENEO / VOLTO</div>
+                        <span class="tile-pill">Outils de Cotation</span>
                     </div>
+
+                    <div class="service-tile dev-mode">
+                        <span class="tile-icon">🚧</span>
+                        <div class="tile-name">Accès OSE<br><span style="font-size:0.8rem; font-weight:400">CRM Propriétaire</span></div>
+                        <span class="tile-pill">En cours de développement</span>
+                    </div>
+
                     <div class="service-tile" onclick="openModal('market')">
                         <span class="tile-icon">📊</span>
                         <div class="tile-name">Info Marché & Veille</div>
-                        <span class="tile-pill">Inclus</span>
+                        <span class="tile-pill">Hebdomadaire</span>
                     </div>
+
                     <div class="service-tile" onclick="openModal('litiges')">
                         <span class="tile-icon">⚖️</span>
                         <div class="tile-name">Gestion Litiges Fournisseur</div>
-                        <span class="tile-pill">Inclus</span>
+                        <span class="tile-pill">Support Expert</span>
                     </div>
+
                     <div class="service-tile" onclick="openModal('formation-outils')">
                         <span class="tile-icon">🛠️</span>
                         <div class="tile-name">Formation Outils</div>
-                        <span class="tile-pill">Inclus</span>
+                        <span class="tile-pill">Tutoriels</span>
                     </div>
+
                 </div>
             </div>
         </div>
 
         <div class="section-title">
-            <span>Sur Demande</span>
-            <h2>Catalogue Expert Solutions</h2>
-            <p style="color: #6B7280; margin-top: 0.5rem;">Activez des leviers de performance additionnels.</p>
+            <span>Catalogue Expert Solutions</span>
+            <h2>Services sur Mesure & Options</h2>
         </div>
 
         <div class="expert-grid">
-            
             <div class="expert-card" onclick="openModal('turpe')">
-                <div class="expert-header">
-                    <span class="expert-icon">📉</span>
-                </div>
-                <div class="expert-body">
-                    <div class="expert-name">Optimisation TURPE</div>
-                    <div class="expert-badge">Sur devis / Forfait</div>
-                </div>
+                <div class="expert-header"><span class="expert-icon" style="font-size:2.5rem">📉</span></div>
+                <div class="expert-body"><div class="expert-name">Optimisation TURPE</div><div class="expert-badge">150 €</div></div>
             </div>
-
+            
             <div class="expert-card" onclick="openModal('assises')">
-                <div class="expert-header">
-                    <span class="expert-icon">🏛️</span>
-                </div>
-                <div class="expert-body">
-                    <div class="expert-name">Optimisation Assises</div>
-                    <div class="expert-badge">Partage d'économies</div>
-                </div>
+                <div class="expert-header"><span class="expert-icon" style="font-size:2.5rem">🏛️</span></div>
+                <div class="expert-body"><div class="expert-name">Optimisation Assises</div><div class="expert-badge">150€ + 30% Eco</div></div>
             </div>
 
             <div class="expert-card" onclick="openModal('upfront')">
-                <div class="expert-header">
-                    <span class="expert-icon">💰</span>
-                </div>
-                <div class="expert-body">
-                    <div class="expert-name">Facilité de Caisse (Upfront)</div>
-                    <div class="expert-badge">10% Marge</div>
-                </div>
+                <div class="expert-header"><span class="expert-icon" style="font-size:2.5rem">💰</span></div>
+                <div class="expert-body"><div class="expert-name">Facilité de Caisse (Upfront)</div><div class="expert-badge">10% Marge</div></div>
             </div>
 
             <div class="expert-card" onclick="openModal('rdv')">
-                <div class="expert-header">
-                    <span class="expert-icon">🤝</span>
-                </div>
-                <div class="expert-body">
-                    <div class="expert-name">Accompagnement RDV</div>
-                    <div class="expert-badge">Sur mesure</div>
-                </div>
+                <div class="expert-header"><span class="expert-icon" style="font-size:2.5rem">🤝</span></div>
+                <div class="expert-body"><div class="expert-name">Accompagnement RDV</div><div class="expert-badge">Sur Mesure</div></div>
             </div>
 
             <div class="expert-card" onclick="openModal('go')">
-                <div class="expert-header">
-                    <span class="expert-icon">🌱</span>
-                </div>
-                <div class="expert-body">
-                    <div class="expert-name">Garanties d'Origine</div>
-                    <div class="expert-badge">Sur mesure</div>
-                </div>
+                <div class="expert-header"><span class="expert-icon" style="font-size:2.5rem">🌱</span></div>
+                <div class="expert-body"><div class="expert-name">Garanties d'Origine</div><div class="expert-badge">Sur Mesure</div></div>
             </div>
 
             <div class="expert-card" onclick="openModal('grands-comptes')">
-                <div class="expert-header">
-                    <span class="expert-icon">🏢</span>
-                </div>
-                <div class="expert-body">
-                    <div class="expert-name">Sourcing Grands Comptes</div>
-                    <div class="expert-badge">Sur mesure</div>
-                </div>
+                <div class="expert-header"><span class="expert-icon" style="font-size:2.5rem">🏢</span></div>
+                <div class="expert-body"><div class="expert-name">Sourcing Grands Comptes</div><div class="expert-badge">Sur Mesure</div></div>
             </div>
 
+            <div class="expert-card" onclick="openModal('acc')">
+                <div class="expert-header"><span class="expert-icon" style="font-size:2.5rem">🏗️</span></div>
+                <div class="expert-body"><div class="expert-name">Projets ACC & Spécifiques</div><div class="expert-badge">Sur Mesure</div></div>
+            </div>
         </div>
 
     </div>
@@ -448,149 +477,302 @@
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModalBtn()">×</button>
-            <span class="modal-icon" id="mIcon"></span>
-            <h3 class="modal-title" id="mTitle">Titre du service</h3>
-            <div class="modal-price" id="mPrice">Inclus dans le pack</div>
-            <p class="modal-desc" id="mDesc">Description du service...</p>
             
-            <div class="modal-list-title">Ce que vous obtenez :</div>
-            <ul class="modal-list" id="mList">
-                </ul>
+            <div class="modal-header-group">
+                <span class="modal-icon" id="mIcon"></span>
+                <h3 class="modal-title" id="mTitle"></h3>
+                <div class="modal-price" id="mPrice"></div>
+            </div>
+
+            <div id="normalContent">
+                <div id="visualContainer"></div>
+                
+                <p class="modal-desc" id="mDesc"></p>
+                
+                <div id="valueAddedBox" class="value-added-box">
+                    <div class="value-added-title">Pourquoi activer ce service ?</div>
+                    <div class="value-added-text" id="mValue"></div>
+                </div>
+
+                <div class="modal-list-title" id="mListTitle">Livrables & Actions :</div>
+                <ul class="modal-list" id="mList"></ul>
+                <div id="extraBtnContainer"></div>
+            </div>
+
+            <div id="detailedContent" style="display: none;">
+                <button onclick="toggleDetails()" style="background:none; border:none; color:#6B7280; margin-bottom:1rem; cursor:pointer; font-weight:600; font-size:1rem;">← Retour au résumé</button>
+                <h3 style="color:var(--primary); margin-bottom:1.5rem;">Programme Détaillé</h3>
+                <div class="detailed-program" id="mDetailedList"></div>
+            </div>
+
         </div>
     </div>
 
     <script>
         // DATA
         const servicesData = {
-            // PACK LAUNCH
             'formation-init': {
                 icon: '🎓',
                 title: 'Formation Initiale Courtage',
-                price: 'Inclus dans le Pack',
-                desc: 'Un parcours d\'intégration complet pour maîtriser les fondamentaux du marché de l\'énergie et la posture commerciale.',
-                items: ['Session E-learning ou Présentiel', 'Playbook de vente complet', 'Quiz de validation des acquis']
-            },
-            'admin': {
-                icon: '📁',
-                title: 'Suivi des Ventes & Facturation',
-                price: 'Inclus dans le Pack',
-                desc: 'Déléguez toute la complexité administrative. Nous gérons le cycle de vie du contrat post-signature.',
-                items: ['Validation conformité des dossiers', 'Envoi aux fournisseurs', 'Émission de vos factures (Autofacturation)']
+                price: 'Inclus',
+                desc: 'Un parcours complet pour maîtriser le marché de l\'énergie et les techniques de vente.',
+                items: ['Vidéos E-learning', 'Supports PDF & Slides', 'Quiz de validation'],
+                hasDetails: true,
+                detailsHtml: `
+                    <div class="program-section">
+                        <div class="program-header">🎓 Formations Métiers - Comprendre le courtage</div>
+                        
+                        <div class="program-item">
+                            <span class="program-title">Introduction au courtage en énergie</span>
+                            <span class="program-format">Vidéo courte + PDF résumé + Slide</span>
+                        </div>
+                        <div class="program-item">
+                            <span class="program-title">Le marché (ARENH, TURPE, CEE...)</span>
+                            <span class="program-format">Vidéo + Infographie + Slide</span>
+                        </div>
+                        <div class="program-item">
+                            <span class="program-title">Analyse de factures (EDF/ENGIE...)</span>
+                            <span class="program-format">Vidéo + PDF pratique + Slide</span>
+                        </div>
+                        <div class="program-item">
+                            <span class="program-title">Typologies de clients et profils</span>
+                            <span class="program-format">Vidéo + Fiche persona</span>
+                        </div>
+                        <div class="program-item">
+                            <span class="program-title">Process Smart Électricité (Audit, Suivi)</span>
+                            <span class="program-format">Tutoriel + Infographie</span>
+                        </div>
+                        <div class="program-item">
+                            <span class="program-title">Outils internes et ressources SME</span>
+                            <span class="program-format">Vidéo tutoriel + PDF</span>
+                        </div>
+                    </div>
+
+                    <div class="program-section">
+                        <div class="program-header">🎒 Formations Commerciales - Prospection & Closing</div>
+                        
+                        <div class="program-item">
+                            <span class="program-title">Structurer son pitch (30s, 1min, 3min)</span>
+                            <span class="program-format">Vidéo + PDF pratique</span>
+                        </div>
+                        <div class="program-item">
+                            <span class="program-title">Techniques de prospection B2B</span>
+                            <span class="program-format">Vidéo + PDF pratique</span>
+                        </div>
+                        <div class="program-item">
+                            <span class="program-title">Répondre aux objections</span>
+                            <span class="program-format">Vidéo + PDF pratique</span>
+                        </div>
+                        <div class="program-item">
+                            <span class="program-title">Closing et suivi client</span>
+                            <span class="program-format">Vidéo + PDF pratique</span>
+                        </div>
+                    </div>
+                `
             },
             'multi-fournisseur': {
                 icon: '⚡',
                 title: 'Courtage Multi-Fournisseurs',
-                price: 'Inclus dans le Pack',
-                desc: 'Accédez immédiatement à notre portefeuille de partenaires énergéticiens négociés.',
+                price: 'Inclus',
+                desc: 'Accédez à près de 50 fournisseurs partenaires pour couvrir tous les besoins de vos clients.',
                 items: ['Grilles tarifaires unifiées', 'Contrats cadres pré-négociés', 'Accès Gaz et Électricité']
             },
-            'tools': {
+            'eneo-volto': {
                 icon: '💻',
-                title: 'Accès OSE & ENEO/VOLTO',
-                price: 'Inclus dans le Pack',
-                desc: 'La puissance de la tech : CRM propriétaire et Agrégateurs de prix en temps réel.',
-                items: ['Licence utilisateur OSE', 'Tableau de bord activité', 'Comparateur de prix instantané']
+                title: 'Accès ENEO / VOLTO',
+                price: 'Inclus',
+                desc: 'Vos outils de cotation indispensables pour éditer des comparateurs d\'offres en temps réel.',
+                items: ['Comparateur Électricité & Gaz', 'Génération de propositions', 'Mise à jour tarifs en direct']
             },
             'market': {
                 icon: '📊',
                 title: 'Info Marché & Veille',
-                price: 'Inclus dans le Pack',
-                desc: 'Restez expert face à vos clients grâce à notre veille continue des marchés boursiers.',
-                items: ['Newsletter tendances hebdo', 'Alertes volatilité', 'Argumentaires à jour']
+                price: 'Inclus',
+                desc: 'Restez expert grâce à nos analyses hebdomadaires.',
+                items: ['Newsletter tendances', 'Alertes prix', 'Argumentaires à jour'],
+                visualHtml: `
+                    <div class="market-visual">
+                        <div class="market-visual-header">
+                            <span>NEWSLETTER #42</span>
+                            <span>20 NOV 2025</span>
+                        </div>
+                        <div class="market-visual-title">⚡ ÉLECTRICITÉ : Baisse confirmée sur le Q4</div>
+                        <div class="trend-indicator">↘ Tendance Baissière (-12%)</div>
+                        <div class="dummy-graph"><div class="dummy-line"></div></div>
+                        <p style="font-size:0.8rem; margin-top:10px; opacity:0.9;">Les prix spot continuent de chuter suite à la reprise du nucléaire...</p>
+                    </div>
+                `
             },
             'litiges': {
                 icon: '⚖️',
                 title: 'Gestion Litiges Fournisseur',
-                price: 'Inclus dans le Pack',
-                desc: 'Notre back-office intervient pour débloquer les situations complexes (coupures, facturation erronée).',
-                items: ['Ticketing de suivi', 'Résolution directe avec fournisseurs', 'Protection réputation']
+                price: 'Inclus (Selon cas d\'usages)',
+                desc: 'Notre back-office intervient pour débloquer les situations complexes selon la nature du dossier.',
+                items: ['Suivi ticketing', 'Résolution directe', 'Médiation']
             },
             'formation-outils': {
                 icon: '🛠️',
                 title: 'Formation Outils',
-                price: 'Inclus dans le Pack',
-                desc: 'Soyez opérationnel techniquement dès le premier jour.',
-                items: ['Tutos vidéos', 'Guides PDF', 'Support prise en main']
+                price: 'Inclus',
+                desc: 'Maîtrisez l\'écosystème technique de Smart-Electricité.',
+                items: ['Formation Outils OSE', 'Formation Outils de Cotations (Eneo/Volto)', 'Toute autre ressource utile']
             },
-
-            // EXPERT SOLUTIONS
-            'turpe': {
-                icon: '📉',
-                title: 'Optimisation TURPE',
-                price: '150€ / Dossier (Sur demande)',
-                desc: 'Analyse technique de la puissance souscrite pour réduire les coûts d\'acheminement.',
-                items: ['Audit de puissance (10 min/Pt)', 'Rapport d\'économie', 'Gestion de la demande Enedis']
+            'admin': {
+                icon: '📁',
+                title: 'Suivi Ventes & Facturation',
+                price: 'Inclus',
+                desc: 'Nous gérons l\'administratif pour vous.',
+                items: ['Validation dossiers', 'Autofacturation', 'Envoi fournisseurs']
             },
-            'assises': {
-                icon: '🏛️',
-                title: 'Optimisation des Assises',
-                price: 'Frais dossier + 30% des gains',
-                desc: 'Récupération des taxes (CSPE/TICFE) pour les industriels éligibles.',
-                items: ['Audit d\'éligibilité', 'Montage dossier Douanes', 'Suivi du remboursement']
+            
+            // --- CATALOGUE EXPERT ---
+            'turpe': { 
+                icon: '📉', 
+                title: 'Optimisation TURPE', 
+                price: '150€ / Dossier', 
+                desc: 'Analyse de la puissance souscrite et de l\'option tarifaire d\'acheminement.', 
+                items: ['Audit de puissance', 'Rapport d\'économie', 'Gestion demande Enedis'],
+                extraPrice: 'Service sur demande',
+                valueAdded: 'Réduisez les coûts fixes de vos clients sans modifier leur consommation grâce à un arbitrage technique fin.'
             },
-            'upfront': {
-                icon: '💰',
-                title: 'Facilité de Caisse (Upfront)',
-                price: 'Coût : 10% de Marge Revendeur',
-                desc: 'Besoin de trésorerie ? Percevez vos commissions en avance.',
-                items: ['Paiement anticipé', 'Scoring partenaire', 'Sécurisation du BFR']
+            'assises': { 
+                icon: '🏛️', 
+                title: 'Optimisation Assises', 
+                price: '150€ (frais) + 30% des gains', 
+                desc: 'Montage du dossier d\'exonération ou de taux réduit pour les industriels éligibles.', 
+                items: ['Audit éligibilité', 'Montage dossier Douanes', 'Suivi du remboursement'],
+                extraPrice: 'Service sur demande',
+                valueAdded: 'Apportez une source de cash immédiate à vos clients industriels et fidélisez-les grâce à une expertise fiscale rare.'
             },
-            'rdv': {
-                icon: '🤝',
-                title: 'Accompagnement RDV Client',
-                price: 'Sur Mesure',
-                desc: 'Faites venir un Directeur Commercial ou un Expert Technique pour closer vos gros deals.',
-                items: ['Préparation stratégique', 'Présence physique ou visio', 'Debriefing commercial']
+            'upfront': { 
+                icon: '💰', 
+                title: 'Facilité de Caisse (Upfront)', 
+                price: '10% de Marge Revendeur', 
+                desc: 'Avance de trésorerie sur les commissions futures (au lieu du paiement au flux).', 
+                items: ['Paiement anticipé', 'Scoring partenaire', 'Sécurisation du BFR'],
+                extraPrice: 'Service sur demande',
+                valueAdded: 'Sécurisez votre trésorerie et financez votre croissance sans attendre les délais de paiement fournisseurs.'
             },
-            'go': {
-                icon: '🌱',
-                title: 'Garanties d\'Origine',
-                price: 'Sur Mesure',
-                desc: 'Verdissement de l\'offre pour les clients RSE.',
-                items: ['Sourcing certificats verts', 'Attestations officielles', 'Valorisation marketing']
+            'rdv': { 
+                icon: '🤝', 
+                title: 'Accompagnement RDV Client', 
+                price: 'Prix sur Mesure', 
+                desc: 'Présence d\'un Directeur Commercial ou Expert technique lors de closings complexes.', 
+                items: ['Préparation du RDV', 'Présence (visio/physique)', 'Debriefing'],
+                extraPrice: 'Service sur demande',
+                valueAdded: 'Maximisez votre taux de transformation sur les dossiers stratégiques en vous appuyant sur notre crédibilité technique.'
             },
-            'grands-comptes': {
-                icon: '🏢',
-                title: 'Sourcing Grands Comptes',
-                price: 'Sur Mesure',
-                desc: 'Stratégies d\'achat complexes pour les volumes > 1GWh.',
-                items: ['Achats par tranches (clics)', 'Analyse ARENH complexe', 'Note de stratégie']
+            'go': { 
+                icon: '🌱', 
+                title: 'Garanties d\'Origine', 
+                price: 'Prix sur Mesure', 
+                desc: 'Sourcing et certification d\'énergie verte.', 
+                items: ['Sourcing certificats verts', 'Attestations officielles', 'Valorisation marketing'],
+                extraPrice: 'Service sur demande',
+                valueAdded: 'Répondez aux enjeux RSE de vos clients avec une traçabilité officielle, un levier de différenciation fort.'
+            },
+            'grands-comptes': { 
+                icon: '🏢', 
+                title: 'Sourcing Grands Comptes', 
+                price: 'Prix sur Mesure', 
+                desc: 'Stratégie d\'achat sur mesure (achats par tranches, clics, ARENH complexe).', 
+                items: ['Stratégie d\'achat', 'Exécution ordres marchés', 'Reporting'],
+                extraPrice: 'Service sur demande',
+                valueAdded: 'Accédez aux salles de marchés pour sécuriser des volumes > 1 GWh aux meilleurs moments, comme les grands courtiers.'
+            },
+            'acc': { 
+                icon: '🏗️', 
+                title: 'ACC & Projets Spécifiques', 
+                price: 'Prix sur Mesure', 
+                desc: '(Autoconsommation Collective) Accompagnement technique sur les nouveaux modèles énergétiques.', 
+                items: ['Étude de faisabilité', 'Dimensionnement', 'Montage juridique'],
+                extraPrice: 'Service sur demande',
+                valueAdded: 'Positionnez-vous comme un acteur de la transition énergétique locale avec des solutions innovantes et durables.'
             }
         };
 
         // LOGIC
         const modalOverlay = document.getElementById('modalOverlay');
-        
+        const normalContent = document.getElementById('normalContent');
+        const detailedContent = document.getElementById('detailedContent');
+        const mDetailedList = document.getElementById('mDetailedList');
+        const valueAddedBox = document.getElementById('valueAddedBox');
+
         function openModal(id) {
             const data = servicesData[id];
             if(!data) return;
 
-            // Populate content
+            // Reset views
+            normalContent.style.display = 'block';
+            detailedContent.style.display = 'none';
+            document.getElementById('visualContainer').innerHTML = '';
+            valueAddedBox.style.display = 'none'; // Hide by default
+
+            // Fill Data
             document.getElementById('mIcon').textContent = data.icon;
             document.getElementById('mTitle').textContent = data.title;
-            document.getElementById('mPrice').textContent = data.price;
-            document.getElementById('mDesc').textContent = data.desc;
             
-            // Color logic for price tag
+            // Price display logic
             const priceTag = document.getElementById('mPrice');
+            priceTag.textContent = data.price;
+            
             if(data.price.includes('Inclus')) {
-                priceTag.style.color = '#2563EB';
-                priceTag.style.background = '#EFF6FF';
+                priceTag.style.color = '#2563EB'; priceTag.style.background = '#EFF6FF'; priceTag.style.border = '1px solid #BFDBFE';
             } else {
-                priceTag.style.color = '#B45309';
-                priceTag.style.background = '#FFFBEB';
+                priceTag.style.color = '#B45309'; priceTag.style.background = '#FFFBEB'; priceTag.style.border = '1px solid #FDE68A';
+                if(data.extraPrice) {
+                   priceTag.textContent += " (" + data.extraPrice + ")";
+                }
             }
 
+            // Visual for Market Intel
+            if(data.visualHtml) {
+                document.getElementById('visualContainer').innerHTML = data.visualHtml;
+            }
+
+            document.getElementById('mDesc').innerHTML = data.desc; 
+
+            // Valeur Ajoutée Logic
+            if (data.valueAdded) {
+                valueAddedBox.style.display = 'block';
+                document.getElementById('mValue').textContent = data.valueAdded;
+            }
+            
             // List items
             const list = document.getElementById('mList');
             list.innerHTML = '';
-            data.items.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                list.appendChild(li);
-            });
+            if(data.items) {
+                data.items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    list.appendChild(li);
+                });
+            }
+
+            // "Découvrir" Button Logic
+            const btnContainer = document.getElementById('extraBtnContainer');
+            btnContainer.innerHTML = '';
+            
+            if(data.hasDetails) {
+                const btn = document.createElement('button');
+                btn.className = 'btn-discover';
+                btn.textContent = 'Découvrir le programme complet';
+                btn.onclick = toggleDetails;
+                btnContainer.appendChild(btn);
+                mDetailedList.innerHTML = data.detailsHtml;
+            }
 
             modalOverlay.classList.add('active');
+        }
+
+        function toggleDetails() {
+            if(normalContent.style.display !== 'none') {
+                normalContent.style.display = 'none';
+                detailedContent.style.display = 'block';
+            } else {
+                normalContent.style.display = 'block';
+                detailedContent.style.display = 'none';
+            }
         }
 
         function closeModal(event) {
@@ -598,7 +780,6 @@
                 modalOverlay.classList.remove('active');
             }
         }
-
         function closeModalBtn() {
             modalOverlay.classList.remove('active');
         }
